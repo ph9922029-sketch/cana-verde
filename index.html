@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cana Verde - Caldo de Cana e Pastel</title>
+    <style>
+        :root {
+            --verde: #2e7d32;
+            --amarelo: #fdd835;
+            --bege: #fff8e1;
+            --escuro: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bege);
+            color: var(--escuro);
+        }
+
+        header {
+            background-color: var(--verde);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .vitrine {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        .vitrine img {
+            width: 250px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid var(--amarelo);
+        }
+
+        .cardapio {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        h2 { color: var(--verde); border-bottom: 2px solid var(--amarelo); padding-bottom: 5px; }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+
+        .formulario {
+            margin-top: 30px;
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #25d366; /* Cor do WhatsApp */
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: #128c7e; }
+
+        footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #666; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌿 Cana Verde</h1>
+    <p>O melhor caldo de cana e o pastel mais crocante da região!</p>
+</header>
+
+<div class="container">
+    
+    <div class="vitrine">
+        <img src="file:///C:/Users/hp992/Pictures/images.jfif" alt="Caldo de Cana">
+        <img src="file:///C:/Users/hp992/Pictures/images%20(1).jfif" alt="Pastel">
+        <img src="file:///C:/Users/hp992/Pictures/ac17e2cfe147a170a01e7d758c78.jpg" alt="Lanche">
+    </div>
+
+    <div class="cardapio">
+        <h2>Cardápio</h2>
+        <div class="item"><span>Pastel (Carne, Queijo, Frango)</span> <strong>R$ 8,00</strong></div>
+        <div class="item"><span>Pastel Especial (Completo)</span> <strong>R$ 12,00</strong></div>
+        <div class="item"><span>Caldo de Cana (300ml)</span> <strong>R$ 6,00</strong></div>
+        <div class="item"><span>Caldo de Cana (500ml)</span> <strong>R$ 9,00</strong></div>
+    </div>
+
+    <div class="formulario">
+        <h2>Fazer Pedido</h2>
+        <form id="formPedido">
+            <div class="campo">
+                <label>Seu Nome:</label>
+                <input type="text" id="nome" placeholder="Ex: João Silva" required>
+            </div>
+
+            <div class="campo">
+                <label>Sabor do Pastel:</label>
+                <select id="sabor">
+                    <option value="Carne">Carne</option>
+                    <option value="Queijo">Queijo</option>
+                    <option value="Frango com Catupiry">Frango com Catupiry</option>
+                    <option value="Pizza">Pizza</option>
+                    <option value="Especial">Especial da Casa</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Tamanho do Caldo de Cana:</label>
+                <select id="caldo">
+                    <option value="Nenhum">Não quero caldo agora</option>
+                    <option value="300ml">300ml</option>
+                    <option value="500ml">500ml</option>
+                    <option value="1 Litro">1 Litro</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Observações (ex: sem gelo, bem frito):</label>
+                <textarea id="obs" rows="3"></textarea>
+            </div>
+
+            <button type="button" onclick="enviarWhatsApp()">Enviar Pedido via WhatsApp</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    © 2023 Cana Verde - Aberto todos os dias
+</footer>
+
+<script>
+    function enviarWhatsApp() {
+        const nome = document.getElementById('nome').value;
+        const sabor = document.getElementById('sabor').value;
+        const caldo = document.getElementById('caldo').value;
+        const obs = document.getElementById('obs').value;
+
+        if(!nome) { alert("Por favor, digite seu nome."); return; }
+
+        const mensagem = `Olá! Meu nome é ${nome}. Gostaria de pedir:
+- Pastel: ${sabor}
+- Caldo de Cana: ${caldo}
+- Observação: ${obs}`;
+
+        const textoFinal = encodeURIComponent(mensagem);
+        // Substitua o 0000000000000 pelo seu número de WhatsApp com DDD
+        window.open(`https://wa.me/5586988215942?text=${textoFinal}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
